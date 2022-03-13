@@ -138,7 +138,10 @@ class ViewController: UIViewController {
     }
     
     @objc func letterTapped(_ sender : UIButton) {
-        
+        guard let buttonTitle = sender.titleLabel?.text else { return }
+        currentAnswer.text = currentAnswer.text?.appending(buttonTitle)
+        activedButtons.append(sender)
+        sender.isHidden = true
     }
     
     @objc func submitTapped(_ sender : UIButton) {
