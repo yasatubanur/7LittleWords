@@ -23,6 +23,7 @@ class ViewController: UIViewController {
         }
     }
     var level = 1
+    var realScore = 0
     
     override func loadView() {
         view = UIView()
@@ -158,16 +159,17 @@ class ViewController: UIViewController {
             var splitAnswers = answersLabel.text?.components(separatedBy: "\n")
             splitAnswers?[solutionPosition] = answerText
             answersLabel.text = splitAnswers?.joined(separator: "\n")
-            
+            realScore += 1
             currentAnswer.text = ""
             score += 1
             
-            if score % 7 == 0 {
+            if realScore % 7 == 0 {
                 let ac = UIAlertController(title: "Well Done!", message: "Are you ready for the next level?", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "Let's go", style: .default, handler: levelUp))
                 present(ac,animated: true)
             }
         } else {
+            score -= 1
             let ac = UIAlertController(title: "Incorrect guess", message: "Try again", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: .none))
             present(ac,animated: true)
